@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 @Getter
@@ -22,12 +23,12 @@ public class City extends BaseEntity {
     @Size(min = 2, max = 60)
     private String cityName;
 
-    @Column
     @Size(min = 2)
+    @Column
     private String description;
 
+    @Min(500)
     @Column(nullable = false)
-    @Size(min = 500)
     private Integer population;
 
     @ManyToOne

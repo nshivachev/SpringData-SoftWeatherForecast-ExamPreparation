@@ -46,7 +46,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public String importCountries() throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
+        final StringBuilder stringBuilder = new StringBuilder();
 
         final Set<CountryImportDto> countryDtos = new HashSet<>(Arrays.asList(gson.fromJson(readCountriesFromFile(), CountryImportDto[].class)));
 
@@ -54,16 +54,14 @@ public class CountryServiceImpl implements CountryService {
                     boolean isValid = this.validationUtil.isValid(countryDto);
 
                     if (!isValid) {
-                        stringBuilder
-                                .append(String.format(INCORRECT_DATA_MESSAGE_FORMAT, "country"))
-                                .append(System.lineSeparator());
-
+                        stringBuilder.append(String.format(INCORRECT_DATA_MESSAGE_FORMAT, "country"));
                         return isValid;
                     }
 
-                    stringBuilder
-                            .append(String.format(SUCCESSFULLY_IMPORTED_DATA_MESSAGE_FORMAT, "country", countryDto.getCurrency()))
-                            .append(System.lineSeparator());
+                    stringBuilder.append(String.format(SUCCESSFULLY_IMPORTED_DATA_MESSAGE_FORMAT,
+                                    "country",
+                                    countryDto.getCountryName(),
+                                    countryDto.getCurrency()));
 
                     return isValid;
                 })

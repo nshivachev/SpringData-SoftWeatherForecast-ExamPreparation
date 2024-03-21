@@ -8,7 +8,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 import java.time.LocalTime;
 
 @Getter
@@ -18,18 +17,18 @@ import java.time.LocalTime;
 @Entity
 @Table(name = "forecasts")
 public class Forecast extends BaseEntity {
-    @Column(name = "day_of_week", nullable = false)
     @Enumerated(EnumType.STRING)
+    @Column(name = "day_of_week", nullable = false)
     private DaysOfWeek dayOfWeek;
 
-    @Column(name = "max_temperature", nullable = false)
     @Min(-20)
     @Max(60)
+    @Column(name = "max_temperature", nullable = false)
     private Double maxTemperature;
 
-    @Column(name = "min_temperature", nullable = false)
     @Min(-50)
     @Max(40)
+    @Column(name = "min_temperature", nullable = false)
     private Double minTemperature;
 
     @Column(nullable = false)
